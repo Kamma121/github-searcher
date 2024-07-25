@@ -29,7 +29,7 @@ Each repository object contains:
     - `commitSha` - The SHA of the last commit on the branch.
 
 #### Example success response: 
-```
+```json
 [
     {
         "repositoryName": "repository-1",
@@ -48,9 +48,8 @@ Each repository object contains:
                 "commitSha": "508efc09cce9f1g3"
             }
         ]
-    },
-    ...
-}            
+    }
+]            
 ```
 
 `Error Response` - The API handles errors by returning a JSON object with the following structure:
@@ -59,7 +58,7 @@ Each repository object contains:
 
 
 #### Example error response:
-``` 
+```json 
 {
     "status": 404,
     "message": "User not found"
@@ -74,7 +73,7 @@ The API handles errors by returning appropriate HTTP status codes and error mess
 - Status: 404 Not Found
 - Description: This error occurs when the specified GitHub user does not exist.
 - Response example:
-    ```
+    ```json
     {
         "status": 404,
         "message": "User not found"
@@ -84,7 +83,7 @@ The API handles errors by returning appropriate HTTP status codes and error mess
 - Status: 403 Forbidden
 - Description: This error occurs when the GitHub API rate limit has been exceeded.
 - Response example:
-    ```
+    ```json
     {
         "status": 403,
         "message": "API rate limit exceeded"
@@ -94,7 +93,7 @@ The API handles errors by returning appropriate HTTP status codes and error mess
 - Status: 500 Internal Server Error
 - Description: This error occurs when there is an internal server error during the processing of the request.
 - Response example:
-    ```
+    ```json
     {
         "status": 500,
         "message": "An internal server error occurred"
@@ -104,7 +103,7 @@ The API handles errors by returning appropriate HTTP status codes and error mess
 - Status: 406 Not Acceptable
 - Description: This error occurs when the requested media type is not acceptable.
 - Response example:
-    ```
+    ```json
     {
         "status": 406,
         "message": "The requested media type is not acceptable"
