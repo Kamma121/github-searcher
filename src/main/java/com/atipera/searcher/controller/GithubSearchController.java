@@ -27,7 +27,7 @@ public class GithubSearchController {
      * @param username the GitHub username
      * @return ResponseEntity containing a list of {@link RepositoryDetails}
      */
-    @GetMapping("/{username}")
+    @GetMapping(value = "/{username}", produces = "application/json")
     public ResponseEntity<List<RepositoryDetails>> getRepositoriesDetails(@PathVariable String username) {
         return ResponseEntity.ok(githubSearchService.processNonForkedUserRepositories(username));
     }

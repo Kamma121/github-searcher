@@ -3,6 +3,7 @@ package com.atipera.searcher.exception;
 import com.atipera.searcher.dto.error.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -21,7 +22,7 @@ public class ExceptionControllerAdvice {
      * @return a {@link ResponseEntity} with an {@link ErrorResponse} body and HTTP status 404
      */
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleUsernameNotFoundException(Exception e) {
+    public ResponseEntity<ErrorResponse> handleUsernameNotFoundException(UserNotFoundException e) {
         var errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -47,9 +48,23 @@ public class ExceptionControllerAdvice {
      * @return a {@link ResponseEntity} with an {@link ErrorResponse} body and HTTP status 403
      */
     @ExceptionHandler(RateLimitExceededException.class)
-    public ResponseEntity<ErrorResponse> handleRateLimitExceededException(Exception e) {
+    public ResponseEntity<ErrorResponse> handleRateLimitExceededException(RateLimitExceededException e) {
         var errorResponse = new ErrorResponse(HttpStatus.FORBIDDEN.value(), e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+    }
+
+    /**
+     * Handles exceptions of type {@link HttpMediaTypeNotAcceptableException}.
+     * Constructs a response entity with HTTP status 406 (Not Acceptable) and a custom error message.
+     *
+     * @param e the caught {@link HttpMediaTypeNotAcceptableException}
+     * @return a {@link ResponseEntity} with an {@link ErrorResponse} body and HTTP status 406
+     */
+    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
+    public ResponseEntity<ErrorResponse> handleHttpMediaTypeNotAcceptableException(
+            HttpMediaTypeNotAcceptableException e) {
+        var errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(), e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
