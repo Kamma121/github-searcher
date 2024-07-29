@@ -33,7 +33,7 @@ class EndToEndGithubSearchTests {
     }
 
     @Test
-    void testGetRepositoryDetailsReturnsCorrectRepositoryDetails() {
+    void testGetRepositoriesDetailsReturnsCorrectRepositoryDetails() {
         stubFor(get(urlEqualTo("/users/octocat/repos"))
                 .willReturn(aResponse()
                         .withStatus(200)
