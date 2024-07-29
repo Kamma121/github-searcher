@@ -56,7 +56,7 @@ public class GithubApiClient {
             }.getType();
             return gson.fromJson(response.body().string(), type);
         } catch (IOException e) {
-            log.error("Failed to process repositories for user {}: {} ", username, e.getMessage());
+            log.error("Failed to process repositories for user {}: {}", username, e.getMessage());
             throw new ProcessingFailedException("Failed to process repositories information");
         }
     }
